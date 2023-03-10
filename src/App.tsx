@@ -1,10 +1,10 @@
-import React from 'react'
+import AllRoutes from "./routes/AllRoutes";
 
 type Props = {}
 
 const App = (props: Props) => {
   return (
-    <div>App</div>
+      <AllRoutes/>
   )
 }
 
