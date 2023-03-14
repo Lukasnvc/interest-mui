@@ -1,8 +1,20 @@
-import { Avatar, Box, Grid, Paper, TextField, Typography } from "@mui/material";
+import * as Yup from 'yup';
+
+import { Avatar, Box, Button, Grid, Paper, Typography } from "@mui/material";
+import { Field, Form, Formik } from "formik";
 
 import LockOpenIcon from '@mui/icons-material/LockOpen';
+import { TextField } from "formik-mui";
+import { User } from '../../types/user';
+import { UserContext } from '../../context/UserContext';
+import { loginFormInitialValues } from './const';
+import { useContext } from 'react';
 
 const Login = () => {
+  const{handleLogIn} = useContext(UserContext)
+  const onSubmit = (user:User) => {
+   handleLogIn(user)
+  }
   return (
     <Paper
     elevation={10}
@@ -22,8 +34,17 @@ const Login = () => {
         >
           Login
         </Typography>
-        <TextField label="Email Address" sx={{ mb: 2 }} fullWidth required />
-        <TextField type='password' label="Password" sx={{mb:2}} fullWidth required/>
+        <Formik
+          initialValues={loginFormInitialValues}
+          onSubmit={onSubmit}
+        >
+          {({isSubmitting}) => (<Form>
+            <Field component={TextField} name='email' type='email' label="Email Address" sx={{ mb: 2 }} fullWidth required />
+            <Field component={TextField} name='password' type='password' label="Password" sx={{ mb: 2 }} fullWidth required />
+            <Button disabled={isSubmitting} type='submit' variant="contained" fullWidth sx={{mb: 2}}>Sign In</Button>
+          </Form>)}
+          
+        </Formik>
      
       </Box>
     </Paper>
