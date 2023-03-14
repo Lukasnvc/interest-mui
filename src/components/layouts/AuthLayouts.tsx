@@ -31,6 +31,7 @@ const AuthLayouts = ({children}: Props) => {
         item
         xs={12}
         md={4}
+        px={2}
       >
         {children}
       </Grid>
