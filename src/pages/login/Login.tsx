@@ -1,13 +1,11 @@
-import * as Yup from 'yup';
-
 import { Avatar, Box, Button, Grid, Paper, Typography } from "@mui/material";
 import { Field, Form, Formik } from "formik";
+import { loginFormInitialValues, loginValidationSchema } from './const';
 
 import LockOpenIcon from '@mui/icons-material/LockOpen';
 import { TextField } from "formik-mui";
 import { User } from '../../types/user';
 import { UserContext } from '../../context/UserContext';
-import { loginFormInitialValues } from './const';
 import { useContext } from 'react';
 
 const Login = () => {
@@ -37,6 +35,7 @@ const Login = () => {
         <Formik
           initialValues={loginFormInitialValues}
           onSubmit={onSubmit}
+          validationSchema={loginValidationSchema}
         >
           {({isSubmitting}) => (<Form>
             <Field component={TextField} name='email' type='email' label="Email Address" sx={{ mb: 2 }} fullWidth required />
