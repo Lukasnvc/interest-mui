@@ -1,12 +1,9 @@
-import * as React from 'react';
-
 import { alpha, styled } from '@mui/material/styles';
 
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
-import IconButton from '@mui/material/IconButton';
 import InputBase from '@mui/material/InputBase';
-import MenuIcon from '@mui/icons-material/Menu';
+import NavbarMenu from './NavbarMenu';
 import SearchIcon from '@mui/icons-material/Search';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
@@ -20,6 +17,7 @@ const Search = styled('div')(({ theme }) => ({
   },
   marginLeft: 0,
   width: '100%',
+  
   [theme.breakpoints.up('sm')]: {
     marginLeft: theme.spacing(1),
     width: 'auto',
@@ -45,9 +43,9 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
-      width: '12ch',
+      width: '20ch',
       '&:focus': {
-        width: '20ch',
+        width: '30ch',
       },
     },
   },
@@ -55,8 +53,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 const Navbar = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1, position: "sticky", top: 0, zIndex: 2 }}>
+      <AppBar position="sticky">
         <Toolbar>
           <Typography
             variant="h6"
@@ -75,6 +73,7 @@ const Navbar = () => {
               inputProps={{ 'aria-label': 'search' }}
             />
           </Search>
+          <NavbarMenu/>
         </Toolbar>
       </AppBar>
     </Box>
