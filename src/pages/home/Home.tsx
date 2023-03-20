@@ -13,15 +13,28 @@ import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { PixabayImage } from "../../types/images";
 import { uniqBy } from "lodash";
+import { useAppSelector } from "../../hooks/store";
 import { useImages } from "../../hooks/images";
 
 type Props = {};
 
 function Home({}: Props) {
+  const searchValue = useAppSelector((state) => state.search.value);
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [page, setPage] = useState(1);
   const [items, setItems] = useState<PixabayImage[]>([]);
-  const { data, isLoading } = useImages(page);
+  const { data, isLoading } = useImages(page, debouncedSearch);
   const images = data || [];
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (searchValue) {
+        setDebouncedSearch(searchValue);
+        setPage(1);
+        setItems([]);
+      }
+    }, 1000);
+  }, [searchValue]);
 
   useEffect(() => {
     if (!isLoading) {
